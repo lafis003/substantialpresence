@@ -1,0 +1,668 @@
+/* ─── Reset & Base ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0f1117;
+  --surface: #1a1d27;
+  --surface2: #242736;
+  --border: #2e3147;
+  --accent: #4f8ef7;
+  --accent-hover: #6ba3ff;
+  --accent-soft: rgba(79,142,247,0.12);
+  --green: #34d399;
+  --green-soft: rgba(52,211,153,0.12);
+  --amber: #fbbf24;
+  --amber-soft: rgba(251,191,36,0.12);
+  --red: #f87171;
+  --red-soft: rgba(248,113,113,0.12);
+  --text: #e8eaf0;
+  --text-muted: #8b8fa8;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --transition: 0.22s ease;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* ─── Progress bar ─── */
+#progress-bar-container {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--border);
+  z-index: 100;
+}
+#progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.4s ease;
+  border-radius: 0 2px 2px 0;
+}
+
+/* ─── Layout ─── */
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#question-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px 40px;
+}
+
+/* ─── Card ─── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 48px 52px;
+  max-width: 700px;
+  width: 100%;
+  animation: fadeSlideIn 0.3s ease both;
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card .label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.card h1 {
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.card .subtitle {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 36px;
+  line-height: 1.6;
+}
+
+/* ─── Choice buttons ─── */
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.choice-btn {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 18px 20px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color var(--transition), background var(--transition), transform var(--transition);
+  color: var(--text);
+  font-size: 1rem;
+  font-family: inherit;
+  line-height: 1.45;
+}
+
+.choice-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  transform: translateX(3px);
+}
+
+.choice-btn .icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.choice-btn .btn-text { flex: 1; }
+.choice-btn .btn-title { font-weight: 600; display: block; margin-bottom: 2px; }
+.year-chip {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 2px 9px;
+  border-radius: 20px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid rgba(79,142,247,0.25);
+  vertical-align: middle;
+  letter-spacing: 0.02em;
+}
+.choice-btn .btn-desc  { font-size: 0.88rem; color: var(--text-muted); display: block; }
+
+/* ─── Back button ─── */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-family: inherit;
+  padding: 8px 0;
+  margin-bottom: 28px;
+  transition: color var(--transition);
+}
+.back-btn:hover { color: var(--text); }
+
+/* ─── Result cards ─── */
+.result-card {
+  border-radius: var(--radius);
+  padding: 36px 40px;
+  max-width: 700px;
+  width: 100%;
+  animation: fadeSlideIn 0.35s ease both;
+}
+
+.result-card.resident {
+  background: var(--green-soft);
+  border: 1.5px solid var(--green);
+}
+.result-card.nonresident {
+  background: var(--accent-soft);
+  border: 1.5px solid var(--accent);
+}
+.result-card.maybe {
+  background: var(--amber-soft);
+  border: 1.5px solid var(--amber);
+}
+.result-card.exception {
+  background: var(--accent-soft);
+  border: 1.5px solid var(--accent);
+}
+
+.result-icon { font-size: 3rem; margin-bottom: 16px; }
+
+.result-card h1 {
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.result-card.resident h1    { color: var(--green); }
+.result-card.nonresident h1 { color: var(--accent); }
+.result-card.maybe h1       { color: var(--amber); }
+.result-card.exception h1   { color: var(--accent); }
+
+.result-card p {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  line-height: 1.65;
+}
+
+.result-card ul {
+  padding-left: 20px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 10px;
+}
+
+.result-card .note {
+  margin-top: 20px;
+  padding: 14px 18px;
+  background: rgba(255,255,255,0.04);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.restart-btn {
+  margin-top: 28px;
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: background var(--transition), transform var(--transition);
+}
+.restart-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
+
+.inline-link {
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  text-decoration: underline;
+  padding: 0;
+}
+
+/* ─── SPT Calculator ─── */
+.spt-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 48px 52px;
+  max-width: 780px;
+  width: 100%;
+  animation: fadeSlideIn 0.3s ease both;
+}
+
+.spt-card h1 {
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.spt-card .subtitle {
+  color: var(--text-muted);
+  margin-bottom: 36px;
+  font-size: 0.95rem;
+}
+
+.year-section {
+  margin-bottom: 32px;
+}
+
+.year-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.year-label h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.year-label .weight-badge {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid rgba(79,142,247,0.3);
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+/* ─── Mode Toggle ─── */
+.mode-toggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.mode-btn {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--surface2);
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all var(--transition);
+  text-align: center;
+}
+.mode-btn.active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+/* ─── Direct input ─── */
+.direct-input-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.days-input {
+  width: 100px;
+  padding: 12px 16px;
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 1.1rem;
+  font-family: inherit;
+  text-align: center;
+  transition: border-color var(--transition);
+  -moz-appearance: textfield;
+}
+.days-input::-webkit-inner-spin-button,
+.days-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+.days-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.days-hint {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+/* ─── Absence mode ─── */
+.absence-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.absence-label-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.total-days-display {
+  font-size: 0.9rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.absence-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.absence-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+.absence-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  transition: transform var(--transition);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.absence-slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
+
+.absence-stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.step-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  font-family: inherit;
+}
+.step-btn:hover { border-color: var(--accent); background: var(--accent-soft); }
+
+.absence-value-display {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  min-width: 48px;
+  text-align: center;
+}
+
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 28px 0;
+}
+
+/* ─── SPT Result box ─── */
+.spt-result-box {
+  border-radius: var(--radius-sm);
+  padding: 20px 24px;
+  margin-top: 8px;
+}
+.spt-result-box.pass  { background: var(--green-soft); border: 1px solid var(--green); }
+.spt-result-box.fail  { background: var(--accent-soft); border: 1px solid var(--accent); }
+.spt-result-box.amber { background: var(--amber-soft); border: 1px solid var(--amber); }
+
+.spt-formula {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.spt-formula span { color: var(--text); font-weight: 600; }
+
+.spt-total {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.spt-result-box.pass  .spt-total { color: var(--green); }
+.spt-result-box.fail  .spt-total { color: var(--accent); }
+.spt-result-box.amber .spt-total { color: var(--amber); }
+
+.spt-verdict {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.spt-continue-btn {
+  margin-top: 28px;
+  width: 100%;
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: background var(--transition), transform var(--transition);
+}
+.spt-continue-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
+.spt-continue-btn:disabled {
+  background: var(--surface2);
+  color: var(--text-muted);
+  cursor: default;
+  transform: none;
+}
+
+/* ─── Welcome screen ─── */
+.welcome-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 56px 60px;
+  max-width: 660px;
+  width: 100%;
+  animation: fadeSlideIn 0.35s ease both;
+  text-align: center;
+}
+
+.welcome-card .logo {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.welcome-card h1 {
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  font-weight: 800;
+  margin-bottom: 14px;
+  background: linear-gradient(135deg, #e8eaf0 30%, #4f8ef7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.welcome-card p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin-bottom: 36px;
+  line-height: 1.7;
+}
+
+.start-btn {
+  padding: 16px 40px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 4px 20px rgba(79,142,247,0.25);
+}
+.start-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 26px rgba(79,142,247,0.35);
+}
+
+.welcome-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+.tag {
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+.tag.blue   { background: var(--accent-soft); color: var(--accent); border: 1px solid rgba(79,142,247,0.25); }
+.tag.green  { background: var(--green-soft); color: var(--green); border: 1px solid rgba(52,211,153,0.25); }
+.tag.amber  { background: var(--amber-soft); color: var(--amber); border: 1px solid rgba(251,191,36,0.25); }
+
+/* ─── Disclaimer footer ─── */
+#disclaimer {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  opacity: 0.6;
+  padding: 16px 24px 20px;
+  max-width: 780px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ─── Prevent horizontal overflow ─── */
+html, body { overflow-x: hidden; }
+
+/* ─── Safe-area insets (iPhone notch / home indicator) ─── */
+#disclaimer {
+  padding-bottom: max(20px, env(safe-area-inset-bottom));
+}
+#progress-bar-container {
+  padding-top: env(safe-area-inset-top);
+}
+
+/* ─── Better tap targets across the board ─── */
+button { touch-action: manipulation; }
+
+/* ─── Responsive ─── */
+@media (max-width: 640px) {
+  /* Base font slightly smaller so content breathes */
+  html { font-size: 16px; }
+
+  /* Card padding */
+  .card, .spt-card { padding: 28px 18px; }
+  .result-card     { padding: 24px 18px; }
+  .welcome-card    { padding: 32px 20px; }
+
+  /* Question area top padding (below fixed progress bar) */
+  #question-area { padding: 52px 14px 32px; }
+
+  /* Card headings */
+  .card h1, .spt-card h1 { font-size: 1.45rem; }
+  .welcome-card h1       { font-size: 1.7rem; }
+
+  /* Mode toggle stacks vertically */
+  .mode-toggle { flex-direction: column; }
+
+  /* Year label: wrap so badge drops to second line if title is long */
+  .year-label         { flex-wrap: wrap; gap: 6px; align-items: flex-start; }
+  .year-label h3      { font-size: 0.92rem; line-height: 1.4; }
+  .year-label .weight-badge { margin-left: auto; }
+
+  /* SPT formula: smaller font + horizontal scroll as last resort */
+  .spt-formula {
+    font-size: 0.76rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+  }
+
+  /* SPT result box */
+  .spt-result-box { padding: 14px 16px; }
+  .spt-total      { font-size: 1.2rem; }
+
+  /* Absence controls: stack slider above stepper */
+  .absence-controls { flex-direction: column; gap: 10px; }
+  .absence-slider   { width: 100%; }
+  .absence-stepper  { justify-content: center; gap: 16px; }
+
+  /* Larger touch targets for +/− buttons (Apple HIG: 44 pt minimum) */
+  .step-btn { width: 44px; height: 44px; font-size: 1.3rem; }
+
+  /* Direct input row */
+  .direct-input-row { gap: 10px; }
+  .days-input       { width: 88px; }
+
+  /* Choice buttons */
+  .choice-btn { padding: 14px 14px; gap: 12px; }
+  .choice-btn .icon { font-size: 1.2rem; }
+
+  /* Result card lists */
+  .result-card ul { padding-left: 16px; }
+
+  /* Continue button full-width */
+  .spt-continue-btn { font-size: 0.95rem; }
+
+  /* Restart button */
+  .restart-btn { width: 100%; text-align: center; }
+
+  /* Disclaimer */
+  #disclaimer { font-size: 0.68rem; padding: 12px 16px 16px; }
+}
