@@ -3,16 +3,164 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <!-- ── Primary SEO ── -->
+  <title>Am I a US Tax Resident? · Substantial Presence Test Calculator</title>
+  <meta name="description" content="Free tool to determine your US tax residency status. Calculates the Substantial Presence Test, covers F-1/J-1 visa exemptions, Closer Connection Exception, and green card test. Takes ~2 minutes." />
+  <meta name="keywords" content="substantial presence test, US tax resident, am I a US resident for tax purposes, US tax residency calculator, resident alien, nonresident alien, F1 visa taxes, J1 visa taxes, 183 day rule, IRS residency test, closer connection exception, Form 8843" />
+  <link rel="canonical" href="https://substantialpresence.com/" />
+
+  <!-- ── Open Graph (Facebook, LinkedIn) ── -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://substantialpresence.com/" />
+  <meta property="og:title"       content="Am I a US Tax Resident? · Substantial Presence Test Calculator" />
+  <meta property="og:description" content="Free tool to determine your US tax residency status. Covers the Substantial Presence Test, F-1/J-1 visa exemptions, Closer Connection Exception, and more." />
+  <meta property="og:locale"      content="en_US" />
+
+  <!-- ── Twitter / X Card ── -->
+  <meta name="twitter:card"        content="summary" />
+  <meta name="twitter:title"       content="Am I a US Tax Resident? · Substantial Presence Test Calculator" />
+  <meta name="twitter:description" content="Free tool to determine your US tax residency status. Covers the Substantial Presence Test, F-1/J-1 exemptions, and Closer Connection Exception." />
+
+  <!-- ── PWA / Mobile ── -->
   <meta name="theme-color" content="#0f1117" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>US Tax Residency Check</title>
+  <meta name="apple-mobile-web-app-title" content="US Tax Residency" />
+
+  <!-- ── Robots ── -->
+  <meta name="robots" content="index, follow" />
+
+  <!-- ── Structured data: WebApplication ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "US Tax Residency Check — Substantial Presence Test Calculator",
+    "url": "https://substantialpresence.com/",
+    "description": "Free interactive tool to determine whether you are a US resident alien or nonresident alien for tax purposes. Covers the IRS Substantial Presence Test, F-1/J-1/M-1 visa exemptions, the Closer Connection Exception, and the Green Card Test.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "audience": {
+      "@type": "Audience",
+      "audienceType": "International students, visa holders, non-US citizens living in the United States"
+    }
+  }
+  </script>
+
+  <!-- ── Structured data: FAQPage (targets "People also ask" / featured snippets) ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Am I a US resident for tax purposes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You are a US resident for tax purposes if you meet either the Green Card Test (you hold a Permanent Resident Card at any point during the year) or the Substantial Presence Test (you were physically present in the US for at least 183 weighted days across a 3-year period, including at least 31 days in the current year). Certain visa holders — such as F-1, J-1, M-1, and diplomatic (A/G) visa holders — are exempt from counting their days of presence."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Substantial Presence Test?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Substantial Presence Test (SPT) is the IRS test used to determine whether a non-US citizen is treated as a resident alien for tax purposes. You meet the test if: (1) you were present in the US for at least 31 days during the current year, AND (2) the sum of (all days this year) + (1/3 of days last year) + (1/6 of days two years ago) equals 183 or more. If you meet the test, you file Form 1040 and report worldwide income."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many days can I be in the US before I am a tax resident?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If you are present in the US for 183 or more days in a calendar year, you will automatically meet the Substantial Presence Test and be treated as a US tax resident (provided you were present at least 31 days in that year). However, because the test uses a weighted 3-year formula, even fewer days in the current year can push your total over 183 if you were also present in the prior two years. Days spent as an exempt individual (F-1, J-1, M-1, diplomatic) do not count."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do F-1 student visa days count toward the Substantial Presence Test?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No — for the first 5 calendar years you are present in the US on an F-1 or F-2 visa, your days of presence do not count toward the Substantial Presence Test. F-1 holders are classified as 'exempt individuals.' After 5 calendar years (any partial year counts as a full year), your exemption expires and your days start counting. All F-1 holders must file Form 8843 every year, even with zero US income."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does a J-1 visa exempt you from the Substantial Presence Test?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "J-1 visa holders may be exempt, but the rules depend on your category. J-1 students are exempt for up to 5 calendar years (same as F-1). J-1 teachers, researchers, and trainees are exempt for up to 2 calendar years in any 6-year period. J-2 dependents follow the same rules as the primary holder. All J-1 holders must file Form 8843 each year."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if I switched from F-1 to H-1B mid-year?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If you switched from F-1 (or another exempt visa) to H-1B during the year, and your F-1 exemption was still valid at the time, only the H-1B days (the non-exempt days) count toward the Substantial Presence Test. Your F-1 days are excluded. The same applies to prior years: if you were on F-1 throughout an entire prior year and your exemption was valid, you enter 0 days for that year in the SPT calculator."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Closer Connection Exception?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Closer Connection Exception lets you be treated as a nonresident alien even if you meet the Substantial Presence Test, as long as: (1) you were present in the US for fewer than 183 days during the current year, (2) you maintained a tax home in a foreign country throughout the year, and (3) you had closer connections to that country than to the US (family, home, bank accounts, social ties, etc.). You claim it by filing Form 8840 by the tax return due date."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is Form 8843?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Form 8843 is an IRS statement that must be filed by all 'exempt individuals' — including F-1, J-1, M-1, and Q visa holders, diplomatic (A/G) visa holders, and anyone excluding days due to a medical condition. It must be filed every year you are present in the US in exempt status, even if you have zero US income. The deadline is April 15 and it must be mailed to the IRS (no online filing option)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between a resident alien and a nonresident alien?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A resident alien files Form 1040 (same as a US citizen) and must report worldwide income from all countries. A nonresident alien files Form 1040-NR and reports only US-source income. Resident aliens can claim the standard deduction and most tax credits. Nonresident aliens generally cannot claim the standard deduction but may itemize. Tax treaty provisions may modify these rules for citizens of certain countries."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a dual-status taxpayer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A dual-status taxpayer is someone who was both a resident alien and a nonresident alien during the same tax year — for example, someone who arrived in the US mid-year and eventually met the Substantial Presence Test. Dual-status taxpayers file a combined return: Form 1040 (labeled 'Dual Status Return') for the resident period plus Form 1040-NR for the nonresident period. They cannot claim the standard deduction and face other restrictions."
+        }
+      }
+    ]
+  }
+  </script>
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div id="app">
     <div id="progress-bar-container"><div id="progress-bar"></div></div>
-    <main id="question-area"></main>
+    <main id="question-area">
+      <!-- Static content shown before JS loads (also crawled by search engines) -->
+      <noscript>
+        <div style="max-width:680px;margin:60px auto;padding:32px 24px;color:#e8eaf0;font-family:system-ui,sans-serif;line-height:1.7;">
+          <h1>Am I a US Resident for Tax Purposes?</h1>
+          <p>This tool requires JavaScript to run the interactive questionnaire. Please enable JavaScript in your browser.</p>
+          <h2>Quick Reference</h2>
+          <p><strong>Green Card Test:</strong> If you hold a US Permanent Resident Card (green card) at any time during the year, you are a US tax resident for that entire year.</p>
+          <p><strong>Substantial Presence Test:</strong> You meet this test if you were present in the US for at least 31 days this year AND the weighted total of (days this year) + (1/3 × days last year) + (1/6 × days two years ago) ≥ 183.</p>
+          <p><strong>Exempt individuals</strong> (F-1, J-1, M-1, Q, A/G visa holders) do not count their days of presence toward the test, for a limited period.</p>
+        </div>
+      </noscript>
+    </main>
     <footer id="disclaimer">
       <strong>Disclaimer:</strong> This tool provides general information only and does not constitute legal or tax advice.
       Results may not reflect your specific circumstances. The operator of this website accepts no liability whatsoever
@@ -20,6 +168,60 @@
       advice specific to your situation.
     </footer>
   </div>
+
+  <!-- Static SEO content — always in the DOM for search engine crawlers -->
+  <section id="seo-content" aria-label="About this tool">
+    <div class="seo-inner">
+      <h1>Am I a US Resident for Tax Purposes?</h1>
+      <p>
+        Use this free calculator to find out whether you're considered a <strong>US resident alien or nonresident alien</strong>
+        under IRS rules — without having to read through dense tax publications.
+        The tool walks you through the <strong>Substantial Presence Test</strong>, common visa exemptions
+        (F-1, J-1, M-1, diplomatic), and exceptions like the <strong>Closer Connection Exception</strong>.
+      </p>
+
+      <h2>The Substantial Presence Test (183-Day Rule)</h2>
+      <p>
+        The IRS uses the Substantial Presence Test to determine whether a non-citizen must file as a
+        resident alien. You meet the test — and are treated as a US tax resident — if you were present
+        in the US for <strong>at least 31 days during the current year</strong> and the following
+        weighted sum is <strong>183 or more</strong>:
+      </p>
+      <p>
+        <em>Days in current year × 1 &nbsp;+&nbsp; Days in prior year × ⅓ &nbsp;+&nbsp; Days two years ago × ⅙</em>
+      </p>
+
+      <h2>F-1 and J-1 Visa Holders</h2>
+      <p>
+        Students on <strong>F-1 visas</strong> and their F-2 dependents are exempt from counting days toward the
+        Substantial Presence Test for up to <strong>5 calendar years</strong> (lifetime). After that, days count
+        normally. <strong>J-1 students</strong> follow the same 5-year rule; J-1 teachers, researchers,
+        and trainees are exempt for up to 2 calendar years in any 6-year period.
+        All exempt individuals must file <strong>Form 8843</strong> annually.
+      </p>
+
+      <h2>Closer Connection Exception</h2>
+      <p>
+        Even if you meet the Substantial Presence Test, you may qualify as a nonresident alien if you
+        were present fewer than 183 days, maintained a <strong>tax home abroad</strong>, and had
+        closer ties to another country. File <strong>Form 8840</strong> to claim this exception.
+      </p>
+
+      <h2>What This Tool Covers</h2>
+      <ul>
+        <li>Green Card Test (automatic residency)</li>
+        <li>Substantial Presence Test with a built-in calculator for up to 3 years</li>
+        <li>"Right now" calculation — check whether you meet the test as of today</li>
+        <li>Exempt visa categories: F-1/F-2, J-1/J-2, M-1/M-2, Q-1, A/G (diplomatic)</li>
+        <li>Mixed-status years (e.g. F-1 → H-1B mid-year)</li>
+        <li>Closer Connection Exception (Form 8840)</li>
+        <li>Tax treaty exception overview</li>
+        <li>Medical condition day exclusions (Form 8843)</li>
+        <li>Dual-status taxpayer guidance</li>
+      </ul>
+    </div>
+  </section>
+
   <script src="app.js"></script>
 </body>
 </html>
